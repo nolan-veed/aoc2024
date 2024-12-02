@@ -1,4 +1,4 @@
-pub fn day2() {
+pub fn day02() {
     println!("Hello, world!");
 
     let input = include_str!("../input02.txt");
@@ -9,7 +9,7 @@ pub fn day2() {
     for line in input.lines() {
         let mut levels = Vec::new();
 
-        let mut parts = line.split_whitespace().map(|s| s.parse::<i32>());
+        let parts = line.split_whitespace().map(|s| s.parse::<i32>());
 
         for part in parts {
             levels.push(part.unwrap());
