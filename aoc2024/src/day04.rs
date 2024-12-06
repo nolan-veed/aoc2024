@@ -1,4 +1,4 @@
-pub fn day04() {
+pub fn run() {
     let input = include_str!("../input04.txt");
     let part1 = false;
 

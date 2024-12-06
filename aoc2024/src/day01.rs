@@ -2,7 +2,7 @@ use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 use std::fs::read_to_string;
 
-pub fn day01() {
+pub fn run() {
     println!("Hello, world!");
 
     let mut list1 = BinaryHeap::new();

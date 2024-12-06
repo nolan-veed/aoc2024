@@ -1,4 +1,4 @@
-pub fn day03() {
+pub fn run() {
     let mut input = include_str!("../input03.txt");
     let part1 = false;
 

@@ -1,7 +1,7 @@
 use std::collections::{HashMap, HashSet};
 
-pub fn day05() {
-    let input = include_str!("../input05.txt");
+pub fn run() {
+    let input = include_str!("../input05-elliot.txt");
     let part2 = true;
 
     let mut total = 0;

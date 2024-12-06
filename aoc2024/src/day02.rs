@@ -1,4 +1,4 @@
-pub fn day02() {
+pub fn run() {
     println!("Hello, world!");
 
     let input = include_str!("../input02.txt");
