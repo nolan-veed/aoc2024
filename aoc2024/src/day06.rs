@@ -9,7 +9,7 @@ pub fn run() {
 
     let mut grid = Array2D::filled_with(' ', num_lines, line_len);
 
-    let mut guard = 0;
+    let mut guard_dir = 0;
     let mut guard_i = 0;
     let mut guard_j = 0;
 
@@ -26,7 +26,34 @@ pub fn run() {
         }
         i += 1;
     }
-    println!("guard={}, guard_i={}, guard_j={}", guard, guard_i, guard_j);
+    let mut count = 0;
+
+    traverse(&mut grid, guard_dir, guard_i, guard_j);
+
+    let max_i = grid.row_len() - 1;
+    let max_j = grid.column_len() - 1;
+
+    for i in 0..max_i + 1 {
+        for j in 0..max_j + 1 {
+            if grid[(i, j)] == 'X' {
+                count += 1;
+            }
+        }
+    }
+
+    println!("count={}", count);
+}
+
+fn traverse(
+    grid: &mut Array2D<char>,
+    mut guard_dir: usize,
+    mut guard_i: usize,
+    mut guard_j: usize,
+) {
+    println!(
+        "guard_dir={}, guard_i={}, guard_j={}",
+        guard_dir, guard_i, guard_j
+    );
 
     let mut dir_mapping: HashMap<usize, (i32, i32)> = HashMap::new();
     dir_mapping.insert(0, (0, -1));
@@ -34,11 +61,11 @@ pub fn run() {
     dir_mapping.insert(2, (0, 1));
     dir_mapping.insert(3, (-1, 0));
 
-    let max_i = line_len - 1;
-    let max_j = num_lines - 1;
+    let max_i = grid.row_len() - 1;
+    let max_j = grid.column_len() - 1;
 
     loop {
-        let d = dir_mapping.get(&guard).unwrap();
+        let d = dir_mapping.get(&guard_dir).unwrap();
         let next_i: i32 = guard_i as i32 + d.1;
         let next_j: i32 = guard_j as i32 + d.0;
 
@@ -54,7 +81,7 @@ pub fn run() {
         let next_c = grid[(next_i as usize, next_j as usize)];
         if next_c == '#' {
             println!("turn");
-            guard = (guard + 1) % 4
+            guard_dir = (guard_dir + 1) % 4
         } else {
             println!("step");
             grid[(guard_i, guard_j)] = 'X';
@@ -63,19 +90,7 @@ pub fn run() {
         }
         println!(
             "loop: guard={}, guard_i={}, guard_j={}",
-            guard, guard_i, guard_j
+            guard_dir, guard_i, guard_j
         );
     }
-
-    let mut count = 0;
-
-    for i in 0..max_i + 1 {
-        for j in 0..max_j + 1 {
-            if grid[(i, j)] == 'X' {
-                count += 1;
-            }
-        }
-    }
-
-    println!("count={}", count);
 }
