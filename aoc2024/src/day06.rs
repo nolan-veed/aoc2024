@@ -9,7 +9,7 @@ pub fn run() {
 
     let mut grid = Array2D::filled_with(' ', num_lines, line_len);
 
-    let mut guard_dir = 0;
+    let guard_dir = 0;
     let mut guard_i = 0;
     let mut guard_j = 0;
 
