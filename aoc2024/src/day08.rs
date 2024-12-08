@@ -2,6 +2,7 @@ use std::collections::{HashMap, HashSet};
 
 pub fn run() {
     let input = include_str!("../input08.txt");
+    let part2 = true;
 
     let max_i = input.lines().count() - 1;
     let max_j = input.lines().clone().next().unwrap().len() - 1;
@@ -37,18 +38,52 @@ pub fn run() {
                     pos_j.1 as i64 - pos_i.1 as i64,
                 );
 
-                let new_pos1 = (pos_i.0 as i64 - dist.0, pos_i.1 as i64 - dist.1);
-                let new_pos2 = (pos_j.0 as i64 + dist.0, pos_j.1 as i64 + dist.1);
+                if !part2 {
+                    let new_pos1 = (pos_i.0 as i64 - dist.0, pos_i.1 as i64 - dist.1);
+                    let new_pos2 = (pos_j.0 as i64 + dist.0, pos_j.1 as i64 + dist.1);
 
-                if new_pos1.0 >= 0 && new_pos1.0 <= max_i as i64 {
-                    if new_pos1.1 >= 0 && new_pos1.1 <= max_j as i64 {
+                    if new_pos1.0 >= 0 && new_pos1.0 <= max_i as i64 {
+                        if new_pos1.1 >= 0 && new_pos1.1 <= max_j as i64 {
+                            println!("new_pos1: {:?}", new_pos1);
+                            positions.insert(new_pos1);
+                            count += 1;
+                        }
+                    }
+                    if new_pos2.0 >= 0 && new_pos2.0 <= max_i as i64 {
+                        if new_pos2.1 >= 0 && new_pos2.1 <= max_j as i64 {
+                            println!("new_pos2: {:?}", new_pos2);
+                            positions.insert(new_pos2);
+                            count += 1;
+                        }
+                    }
+                } else {
+                    let mut new_pos1 = (pos_i.0 as i64, pos_i.1 as i64);
+                    positions.insert(new_pos1);
+
+                    loop {
+                        new_pos1 = (new_pos1.0 as i64 - dist.0, new_pos1.1 as i64 - dist.1);
+                        if new_pos1.0 < 0 || new_pos1.0 > max_i as i64 {
+                            break;
+                        }
+                        if new_pos1.1 < 0 || new_pos1.1 > max_j as i64 {
+                            break;
+                        }
                         println!("new_pos1: {:?}", new_pos1);
                         positions.insert(new_pos1);
                         count += 1;
                     }
-                }
-                if new_pos2.0 >= 0 && new_pos2.0 <= max_i as i64 {
-                    if new_pos2.1 >= 0 && new_pos2.1 <= max_j as i64 {
+
+                    let mut new_pos2 = (pos_j.0 as i64, pos_j.1 as i64);
+                    positions.insert(new_pos2);
+
+                    loop {
+                        new_pos2 = (new_pos2.0 as i64 + dist.0, new_pos2.1 as i64 + dist.1);
+                        if new_pos2.0 < 0 || new_pos2.0 > max_i as i64 {
+                            break;
+                        }
+                        if new_pos2.1 < 0 || new_pos2.1 > max_j as i64 {
+                            break;
+                        }
                         println!("new_pos2: {:?}", new_pos2);
                         positions.insert(new_pos2);
                         count += 1;
