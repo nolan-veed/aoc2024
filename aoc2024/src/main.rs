@@ -6,9 +6,10 @@ mod day05;
 mod day06;
 mod day07;
 mod day08;
+mod day09;
 
 fn main() {
-    let day = 8;
+    let day = 9;
     match day {
         1 => day01::run(),
         2 => day02::run(),
@@ -18,6 +19,7 @@ fn main() {
         6 => day06::run(),
         7 => day07::run(),
         8 => day08::run(),
+        9 => day09::run(),
         _ => println!("Not implemented yet"),
     }
 }
