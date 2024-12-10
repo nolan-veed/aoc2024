@@ -20,13 +20,14 @@ pub fn run() {
     }
 
     let mut count = 0;
+    let mut count_part2 = 0;
     let mut ends: HashSet<(usize, usize)> = HashSet::new();
 
     for i in 0..max_i + 1 {
         for j in 0..max_j + 1 {
             if grid[(i, j)] == 0 {
-                find9(&grid, i, j, max_i, max_j, 0, &mut ends);
-                println!("trailhead: {:?}, ends.len(): {}", (i, j), ends.len());
+                count_part2 += find9(&grid, i, j, max_i, max_j, 0, &mut ends);
+                println!("trailhead: {:?} ends.len(): {} count_part2: {}", (i, j), ends.len(), count_part2);
                 count += ends.len();
                 ends.clear();
             }
@@ -34,6 +35,7 @@ pub fn run() {
     }
 
     println!("{}", count);
+    println!("{}", count_part2);
 }
 
 fn find9(
