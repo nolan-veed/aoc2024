@@ -39,7 +39,10 @@ pub fn run() {
 
     for m in moves {
         let d = dir[&m];
-        let mut new_pos = ((robot_pos.0 as i32 + d.0) as usize, (robot_pos.1 as i32 + d.1) as usize);
+        let new_pos = (
+            (robot_pos.0 as i32 + d.0) as usize,
+            (robot_pos.1 as i32 + d.1) as usize,
+        );
         println!("new_pos: ({}, {})", new_pos.0, new_pos.1);
         if grid[new_pos] == '#' {
             continue;
@@ -50,7 +53,10 @@ pub fn run() {
         } else if grid[new_pos] == 'O' {
             let mut dot_pos = new_pos;
             loop {
-                dot_pos = ((dot_pos.0 as i32 + d.0) as usize, (dot_pos.1 as i32 + d.1) as usize);
+                dot_pos = (
+                    (dot_pos.0 as i32 + d.0) as usize,
+                    (dot_pos.1 as i32 + d.1) as usize,
+                );
                 if grid[dot_pos] == '.' {
                     grid[robot_pos] = '.';
                     grid[dot_pos] = 'O';
@@ -68,8 +74,8 @@ pub fn run() {
     let mut total = 0;
     for i in 0..grid.num_rows() {
         for j in 0..grid.num_columns() {
-            if grid[(i,j)] == 'O' {
-                let coord = 100*i+j;
+            if grid[(i, j)] == 'O' {
+                let coord = 100 * i + j;
                 total += coord;
             }
         }
@@ -77,6 +83,7 @@ pub fn run() {
     println!("total: {}", total);
 }
 
+#[allow(dead_code)]
 fn print_grid(grid: &Array2D<char>) {
     for i in 0..grid.num_rows() {
         for j in 0..grid.num_columns() {
